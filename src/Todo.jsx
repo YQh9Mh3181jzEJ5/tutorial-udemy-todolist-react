@@ -13,10 +13,12 @@ export const Todo = () => {
           <li>
             <p>Todoです</p>
             <button>完了</button>
+            <button>削除</button>
           </li>
           <li>
             <p>Todoです</p>
             <button>完了</button>
+            <button>削除</button>
           </li>
         </ul>
       </div>
@@ -25,11 +27,11 @@ export const Todo = () => {
         <ul>
           <li>
             <p>Todoです</p>
-            <button>完了</button>
+            <button>戻す</button>
           </li>
           <li>
             <p>Todoです</p>
-            <button>完了</button>
+            <button>戻す</button>
           </li>
         </ul>
       </div>
