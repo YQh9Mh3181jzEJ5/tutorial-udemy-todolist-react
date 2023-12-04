@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./styles.css";
+import { InputTodo } from "./comonents/InputTodo";
+import { IncompleteTodos } from "./comonents/IncompleteTodos";
+import { CompleteTodos } from "./comonents/CompleteTodos";
 
 export const Todo = () => {
   const [todoText, setTodoText] = useState("");
@@ -17,13 +20,13 @@ export const Todo = () => {
     setTodoText("");
   };
 
-  const onChangeDelete = (index) => {
+  const onClickDelete = (index) => {
     const newTodos = [...incompleteTodos];
     newTodos.splice(index, 1);
     setIncompleteTodos(newTodos);
   };
 
-  const onChangeComplete = (index) => {
+  const onClickComplete = (index) => {
     const newIncompleteTodos = [...incompleteTodos];
     newIncompleteTodos.splice(index, 1);
 
@@ -32,7 +35,7 @@ export const Todo = () => {
     setCompleteTodos(newCompleteTodos);
   };
 
-  const onChangeBack = (index) => {
+  const onClickBack = (index) => {
     const newCompleteTodos = [...completeTodos];
     newCompleteTodos.splice(index, 1);
 
@@ -43,59 +46,17 @@ export const Todo = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="Todoを入力"
-          value={todoText}
-          onChange={onChangeTodoText}
-        />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
-      <div className="incomplete-area">
-        <p className="title">未完了のTODO</p>
-        <ul>
-          {incompleteTodos.map((todo, index) => (
-            <li key={todo}>
-              <div className="list-row">
-                <p className="todo-item">{todo}</p>
-                <button
-                  onClick={() => {
-                    onChangeComplete(index);
-                  }}
-                >
-                  完了
-                </button>
-                <button
-                  onClick={() => {
-                    onChangeDelete(index);
-                  }}
-                >
-                  削除
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="complete-area">
-        <p className="title">完了のTODO</p>
-        <ul>
-          {completeTodos.map((todo, index) => (
-            <li key={todo}>
-              <div className="list-row">
-                <p className="todo-item">{todo}</p>
-                <button
-                  onClick={() => {
-                    onChangeBack(index);
-                  }}
-                >
-                  戻す
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+      />
+      <IncompleteTodos
+        todos={incompleteTodos}
+        onClickComplete={onClickComplete}
+        onClickDelete={onClickDelete}
+      />
+      <CompleteTodos todos={completeTodos} onClickBack={onClickBack} />
     </>
   );
 };
